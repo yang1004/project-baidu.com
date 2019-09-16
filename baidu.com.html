@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>仿百度注册界面</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.top{
+			width: 100%;
+			height: 100px;
+			background-image: url(./images/t.png);
+			background-repeat: no-repeat;
+			background-position: -150px 0px;
+		}
+		.reg {
+            width: 720px;
+            float: left;
+            margin-left: 250px;
+            margin-top: 50px;
+        }
+        .reg div {
+            position: relative;
+            margin-bottom: 20px;
+            zoom: 1;
+            display: block;
+        }
+        .reg div:after {
+            content: "";
+            clear: both;
+            display: block;
+            visibility: hidden;
+            height: 0;
+        }
+        .reg label {
+            display: block;
+            float: left;
+            width: 65px;            
+            height: 42px;
+            line-height: 42px;
+            margin-right: 10px;
+            font-size: 14px;
+            color: #666;
+            font-weight: 700;
+            text-align: right;
+        }
+        .reg input {
+            display: block;
+            position: relative;
+            float: left;
+            width: 328px;            
+            height: 16px;
+            padding: 11px 10px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            color: #666;
+            transition: .3s;
+            float: left;
+        }
+        #verify-box input:nth-of-type(1){
+             width: 158px;
+        }
+        #verify-box input:nth-of-type(2){
+            width: 160px;            
+            height: 40px;
+            border-radius: 0;            
+            background: #f7f7f7;
+            font-weight: 400;
+            text-align: center;
+            cursor: pointer;
+        }
+        #verify-box input:nth-of-type(2):focus{
+            border: 1px solid #ddd;
+        }
+        #verify-box input:nth-of-type(2):hover{
+            background-color: #eee;
+        }
+        #verify-box .cancel{
+            left: 212px;
+        }
+        .reg .subBtn {
+            position: relative;
+            left: 75px;
+        }
+        .reg .subBtn input {
+            display: block;
+            float: left;            
+            width: 350px;
+            height: 50px;
+            border-radius: 3px;
+            border: 0;            
+            background-image: none;
+            background-color: #3f89ec;             
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            color: #fff;
+        }
+        .reg input:focus {
+            border-color: #488ee7;
+            outline: 0;
+        }
+        .reg .input-err{
+            border-color: red;
+        }
+        .msg{
+            display: none;
+        }
+        .ok {
+            display: inline-block;
+            position: relative;
+            float: left;
+            top: 14px;
+            height: 16px;
+            line-height: 12px;
+            padding-left: 20px;
+            background: url(images/reg_icons.png) -80px 0 no-repeat;
+        }
+        .err {
+            float: left;
+            position: relative;
+            width: 250px;
+            height: 16px;   
+            top: 12px;
+            padding-left: 20px;            
+            background: url(images/reg_icons.png) -80px -23px no-repeat;
+            font-size: 12px;
+            color: #fc4343;            
+        }
+        .cancel {
+            position: absolute;
+            top: 12px;
+            left: 398px;            
+            width: 16px;
+            height: 16px;
+            background: url(images/reg_icons.png) -32px -24px no-repeat;
+            cursor: pointer;
+        }
+        .cancel:hover {
+            background-position: -48px -24px;
+        }
+        .tiptext {
+            height: 40px;
+            line-height: 40px;
+            font-size: 12px;
+            color: #aaa;            
+        }
+        #username-box .tiptext{
+            float: left;  
+            width: 250px;          
+            line-height: 18px;
+        }
+        #pwdChecklist{
+            position: absolute;
+            top: 0;
+            right: 50px;            
+            width: 200px;
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            box-shadow: 1px 1px 1px #efefef;
+            background: #f9f9f9;
+            font-size: 12px;
+        }
+        .pwd-checklist li{
+            list-style: none;
+        }
+        .pwd-checklist .pwd-checklist-item-success {
+            background-position: -86px -128px;
+        }
+        .pwd-checklist  .pwd-checklist-item-error {
+            color: rgb(252, 67, 67);
+            background-position: -86px -144px;
+        }
+        .pwd-checklist-item {
+            line-height: 20px;
+            padding-left: 18px;
+            background: url(images/reg_icons.png) no-repeat -86px -112px;
+            color: #666;
+        }
+        .pwd-checklist-arrow{
+            position: absolute;
+            top: 12px;
+            left: -7px;            
+            width: 14px;
+            height: 14px;
+            background: #f9f9f9;
+            border-bottom: 1px solid #ddd;
+            border-left: 1px solid #ddd; 
+            transform: rotateZ(45deg);                  
+        }
+        #agree-box{
+            font-size: 12px;
+        }
+        #agree-box a{
+            text-decoration: none;
+        }
+        #agree-box label{
+            width: 60px;
+            height: 40px;
+            margin:-12px 0px 0px 2px;            
+            vertical-align: top;
+            font-size: 12px;
+            color: #666;
+            font-weight: normal;
+        }
+        #agree-box input{
+            width: 20px;
+            margin: 1px 0px 0px 70px;
+        }
+        #agree-box .msg{
+            float: none;
+            top: 0;
+            color: #fc4343;
+        }
+	</style>
+</head>
+<body>
+	<div class="top">
+		
+	</div>
+	<div class="reg">
+		<form action="https://baidu.com">
+			<div id="username-box">
+				<label for="username">用户名</label>
+				<input type="text" name="username" autocomplete="off" placeholder="请设置用户名">
+				<span class="cancel" style="display: none;"></span>
+				<p class="msg"></p>
+			</div>
+			<div id="phone-box">
+				<label for="phone">手机号</label>
+				<input type="text" name="phone" autocomplete="off" placeholder="可用于登录和找回密码">
+				<span class="cancel" style="display: none;"></span>
+				<p class="msg"></p>
+			</div>
+			<div id="pwd-box" class="pwd-box">
+				<label for="password">密码</label>
+				<input type="password" name="password" autocomplete="off" placeholder="请设置登录密码">
+				<span class="cancel" style="display: none;"></span>
+				<p class="msg"></p>
+				<div id="pwdChecklist" class="pwd-checklist" style="display: none;">
+					<ul>
+						<li class="pwd-checklist-item">长度为8~14个字符</li>
+						<li class="pwd-checklist-item">支持数字,大小写字母和标点符号</li>
+						<li class="pwd-checklist-item">不允许有空格</li>
+					</ul>
+					<span class="pwd-checklist-arrow"></span>
+				</div>
+			</div>
+			<div id="verify-box">
+				<label for="verify">验证码</label>
+                <input type="text" autocomplete="off" name="verify" placeholder="请输入验证码">
+                <span class="cancel"  style="display: none;"></span>
+                <input type="button"  id="smsBtn" value="获取短信验证码">
+                <span class="msg"></span>  
+			</div>
+			<div id='agree-box'>
+               <input type="checkbox" name='isAgree'> 
+               <label for="isAgree">阅读并接受</label>
+               <a href="#">《百度用户协议》</a>及<a href="#">《百度隐私权保护声明》</a>  
+               <span class="msg" id='agreeErr'>请勾选“阅读并接受百度用户协议”</span>               
+            </div>           
+            <div class="subBtn">
+                <input type="button" value="注册" id="subBtn">
+            </div>
+		</form>
+	</div>
+</body>
+<script>
+	var oForm = document.forms[0];
+	var oUser = oForm.username;
+	var oPwd = oForm.password;
+	var oPhone = oForm.phone;
+	var oVerify = oForm.verify;
+	var oIsAgree = oForm.isAgree;
+	var aMsg = document.querySelectorAll('.msg');
+	var aCancel = document.querySelectorAll('.cancel');
+	var aPwdChecedLi = document.querySelectorAll('#pwdChecklist li');
+	var oPwdList = document.getElementById('pwdChecklist');
+	var oSmsBtn = document.getElementById('smsBtn');
+	var oAgreeErr = document.getElementById('agreeErr');
+	var oSubBtn = document.getElementById('subBtn');
+	var iUsername = false,iPhone = false,iPwd = false,iVerify = false;
+	// console.log(aPwdChecedLi);
+
+	//输入错误
+	function setError(oMsg,aMsg,oInput){
+		oMsg.innerHTML = aMsg;
+		oMsg.className = "err";
+		oInput.className = "input-err";
+	}
+	//输入正确
+	function setOk(oMsg,oInput){
+		oMsg.innerHTML = "";
+		oMsg.className = "ok";
+		oInput.className = "";
+	}
+
+	init();
+	function init(){
+		//初始化页面
+		oUser.focus();
+		aMsg[0].innerHTML = "设置后不可更改<br>中英文均可，最长14个英文或7个汉字";
+		aMsg[0].className = "tiptext";
+
+		
+
+		//利用事件委托处理显示隐藏按钮
+		oForm.oninput = function(ev){
+			// console.log(ev.target);
+			var oEvent = ev || window.event;
+			var oInput = oEvent.target;
+			var oCancel = oInput.nextElementSibling;
+			var oLen = oInput.value.length;
+			if(oLen > 0){
+				oCancel.style.display = "block";
+			}else{
+				oCancel.style.display = "none";
+			}
+		}
+
+		//利用事件委托处理点击取消按钮回复默认状态
+		oForm.onclick = function(ev){
+			// console.log(ev.target);
+			var oEvent = ev || window.event;
+			var oCancel = oEvent.target;
+			var oInput = oCancel.previousElementSibling;
+			if(oInput){
+				if(oInput.name == "username" || 
+					oInput.name == "phone" || 
+					oInput.name == "password" || 
+					oInput.name == "verify")
+				{
+					oInput.value = "";
+					oCancel.style.display = "none";
+					oInput.focus();
+				}
+			}
+			
+		}
+	}
+
+	/*
+
+	oUser.oninput = function(){
+		var oLen = oUser.value.length;
+		if(oLen > 0){
+			aCancel[0].style.display = "block";
+		}else{
+			aCancel[0].style.display = "none";
+			oUser.focus();
+			aMsg[0].innerHTML = "设置后不可更改<br>中英文均可，最长14个英文或7个汉字";
+			aMsg[0].className = "tiptext";
+		}
+	}
+	aCancel[0].onclick = function(){
+		oUser.value = "";
+		aCancel[0].style.display = "none";
+		oUser.focus();
+		aMsg[0].innerHTML = "设置后不可更改<br>中英文均可，最长14个英文或7个汉字";
+		aMsg[0].className = "tiptext";
+	}
+	*/
+
+	//验证用户名
+	checkUsername();
+	function checkUsername(){
+		oUser.onblur = function(){
+			//设置正则
+			var reg1 = /^\s+$/;
+			var reg2 = /[^a-z\u4e00-\u9fa5_\d]/i;
+			var reg3 = /^\d+$/;
+			var sVal = oUser.value;
+
+
+			if(reg1.test(sVal)){//如果输入的都是空格
+				/*
+				aMsg[0].innerHTML = "用户名不合法";
+				aMsg[0].className = "err";
+				oUser.className = "input-err";
+				*/
+				setError(aMsg[0],"用户名不合法",oUser);
+			}else if(reg2.test(sVal) || reg3.test(sVal)){//如果输入的都是数字或是特殊符号
+				/*
+				aMsg[0].innerHTML = "用户名仅支持中英文、数字和下划线,且不能为纯数字";
+				aMsg[0].className = "err";
+				oUser.className = "input-err";
+				*/
+				setError(aMsg[0],"用户名仅支持中英文、数字和下划线,且不能为纯数字",oUser);
+			}else if(sVal.length > 14){//如果输入的字符超过14位
+				/*
+				aMsg[0].innerHTML = "用户名不能超过7个汉字或14个字符";
+				aMsg[0].className = "err";
+				oUser.className = "input-err";
+				*/
+				setError(aMsg[0],"用户名不能超过7个汉字或14个字符",oUser);
+			}else if(sVal == ""){//如果没输入值
+				aMsg[0].className = "msg";
+				oUser.className = "";
+				iUsername = false;
+			}else{//输入的符合要求
+				/*
+				aMsg[0].innerHTML = "";
+				aMsg[0].className = "ok";
+				oUser.className = "";
+				*/
+				setOk(aMsg[0],oUser);
+			}
+		}
+		oUser.onfocus = function(){
+			aMsg[0].innerHTML = "设置后不可更改<br>中英文均可，最长14个英文或7个汉字";
+			aMsg[0].className = "tiptext";
+		}
+	}
+	
+	//验证手机号
+	checkPhone();
+	function checkPhone(){
+		oPhone.onblur = function(){
+			//设置正则
+			var reg1 = /^\s+$/;
+			var reg2 = /^1[35789]\d{9}$/;
+			var sVal = oPhone.value;
+
+			if(sVal == ""){//如果没输入值
+				aMsg[1].className = "msg";
+				oPhone.className = "";
+				iPhone = false;
+			}else if(reg1.test(sVal)){//如果输入的都是空格
+				setError(aMsg[1],"请输入正确手机号",oPhone);
+				iPhone = false;
+			}else if(!reg2.test(sVal)){//如果输入的都是数字或是特殊符号
+				setError(aMsg[1],"手机号码格式不正确",oPhone);
+				iPhone = false;
+			}else{//输入的符合要求
+				setOk(aMsg[1],oPhone);
+				iPhone = true;
+			}
+		}
+		oPhone.onfocus = function(){
+			aMsg[1].innerHTML = "请输入中国大陆手机号，其他用户不可见";
+			aMsg[1].className = "tiptext";
+		}
+	}
+
+	//限制手机号只能输入数字并长度限制11位
+	oPhone.onkeydown = function(ev){
+		// console.log(oPhone.value.length);
+		// console.log(ev.keyCode)
+		if((ev.keyCode<48 || ev.keyCode>57 || oPhone.value.length>10) 
+			&& ev.keyCode!=37 
+			&& ev.keyCode!=39 
+			&& ev.keyCode!=8 
+			&& ev.keyCode!=9){
+			return false;
+		}
+	}
+
+	//密码框验证
+	checkPwd();
+	function checkPwd(){
+		var iPwd1 = false,iPwd2 = false,iPwd3 = false;
+		oPwd.onfocus = function(){
+			oPwdList.style.display = "block";
+			aMsg[2].className = "msg";
+		}
+		oPwd.oninput = function(){
+			var oVal = oPwd.value;
+			var len = oVal.length;
+			reg1 = /[^0-9a-z.]/i;
+			reg2 = /\s/;
+
+			if(len<8 || len>14){
+				aPwdChecedLi[0].className = "pwd-checklist-item pwd-checklist-item-error";
+				iPwd1 = false;
+			}else{
+				aPwdChecedLi[0].className = "pwd-checklist-item pwd-checklist-item-success";
+				iPwd1 = true;
+			}
+
+			if(reg1.test(oVal)){
+				aPwdChecedLi[1].className = "pwd-checklist-item pwd-checklist-item-error";
+				iPwd2 = false;
+			}else{
+				aPwdChecedLi[1].className = "pwd-checklist-item pwd-checklist-item-success";
+				iPwd2 = true;
+			}
+
+			if(reg2.test(oVal)){
+				aPwdChecedLi[2].className = "pwd-checklist-item pwd-checklist-item-error";
+				iPwd3 = false;
+			}else{
+				aPwdChecedLi[2].className = "pwd-checklist-item pwd-checklist-item-success";
+				iPwd3 = true;
+			}
+		}
+
+		//点击取消按钮
+		aCancel[2].onclick = function(){
+			aPwdChecedLi[0].className = "pwd-checklist-item";
+			aPwdChecedLi[1].className = "pwd-checklist-item";
+			aPwdChecedLi[2].className = "pwd-checklist-item";
+		}
+		oPwd.onblur = function(){
+			var oVal = oPwd.value;
+			var len = oVal.length;
+			if(oVal == ""){
+				oPwdList.style.display = "none";
+				iPwd = false;
+			}else if(iPwd1 && iPwd2 && iPwd3){
+				oPwdList.style.display = "none";
+				setOk(aMsg[2],oPwd);
+			}
+			
+		}
+	}
+	
+
+	//获取验证码验证
+	checkVerify();
+	function checkVerify(){
+		oSmsBtn.onclick = function(){
+			if(oPhone.value == ""){
+				setError(aMsg[1],"请输入手机号",oPhone);
+				iVerify = false;
+			}else if(!iPhone){
+				setError(aMsg[1],"请输入正确手机号",oPhone);
+			}else{
+				setOk(aMsg[3],oVerify);
+			}
+		}
+		oVerify.onkeydown = function(ev){
+			// console.log(oVerify.value.length);
+			if((ev.keyCode<48 || ev.keyCode>57 || oVerify.value.length>5) 
+				&& ev.keyCode!=37 
+				&& ev.keyCode!=39 
+				&& ev.keyCode!=8 ){
+				return false;
+			}
+		}
+		
+		oVerify.onblur = function(){
+			var oVal = oVerify.value;
+			var reg = /^\d{6}$/;
+			if(oVal == ""){
+				aMsg[3].className = "msg";
+				oPhone.className = "";
+			}else if(oVal.length < 6){
+				setError(aMsg[3],"验证码输入不正确",oVerify);
+			}else{
+				setOk(aMsg[3],oVerify);
+			}
+		}
+	}
+	
+	//点击注册按钮检测
+	oSubBtn.onclick = function(){
+		if(!iUsername){
+			setError(aMsg[0],"请输入用户名",oUser);
+		}
+		if(!iPhone){
+			setError(aMsg[1],"请输入手机号",oPhone);
+		}
+		if(!iPwd){
+			setError(aMsg[2],"请输入密码",oPwd);
+		}
+		if(!iVerify){
+			setError(aMsg[3],"请输入验证码",oVerify);
+		}
+		if(!oIsAgree.checked){
+			oAgreeErr.style.display = "inline";
+		}
+	}
+	
+</script>
+</html>
